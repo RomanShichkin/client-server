@@ -3,12 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08413A68D3AD5E4B744C3537 /* Pods_Lesson1__Shichkin_Roman_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3C9BB450589CC49FB26BD /* Pods_Lesson1__Shichkin_Roman_.framework */; };
 		8B0D5131265D7CF700EB34E2 /* TokenAndId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D5130265D7CF700EB34E2 /* TokenAndId.swift */; };
 		8B0D5139265D851700EB34E2 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D5138265D851700EB34E2 /* String.swift */; };
+		8B0D513D266416AF00EB34E2 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D513C266416AF00EB34E2 /* AuthViewController.swift */; };
+		8B0D513F26644D4E00EB34E2 /* VkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D513E26644D4E00EB34E2 /* VkAPI.swift */; };
 		8B843DBA2637336300AFE6CC /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843DB92637336300AFE6CC /* News.swift */; };
 		8B843DBE263736E300AFE6CC /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843DBD263736E300AFE6CC /* NewsTableViewController.swift */; };
 		8B843DC4263737E400AFE6CC /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843DC2263737E400AFE6CC /* NewsTableViewCell.swift */; };
@@ -42,8 +45,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27D3C9BB450589CC49FB26BD /* Pods_Lesson1__Shichkin_Roman_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lesson1__Shichkin_Roman_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57D2AE49489059B471595325 /* Pods-Lesson1 (Shichkin Roman).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lesson1 (Shichkin Roman).release.xcconfig"; path = "Target Support Files/Pods-Lesson1 (Shichkin Roman)/Pods-Lesson1 (Shichkin Roman).release.xcconfig"; sourceTree = "<group>"; };
 		8B0D5130265D7CF700EB34E2 /* TokenAndId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAndId.swift; sourceTree = "<group>"; };
 		8B0D5138265D851700EB34E2 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		8B0D513C266416AF00EB34E2 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		8B0D513E26644D4E00EB34E2 /* VkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAPI.swift; sourceTree = "<group>"; };
 		8B843DB92637336300AFE6CC /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		8B843DBD263736E300AFE6CC /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		8B843DC2263737E400AFE6CC /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
@@ -76,6 +83,7 @@
 		8BCB3F27264164DC001F6C7B /* GalleryHorisontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryHorisontalView.swift; sourceTree = "<group>"; };
 		8BCB3F28264164DC001F6C7B /* GalleryHorisontalView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryHorisontalView.xib; sourceTree = "<group>"; };
 		8BCB3F2D26451242001F6C7B /* TransitionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionsManager.swift; sourceTree = "<group>"; };
+		CAFB8119F7F4AC2A1AB54C49 /* Pods-Lesson1 (Shichkin Roman).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lesson1 (Shichkin Roman).debug.xcconfig"; path = "Target Support Files/Pods-Lesson1 (Shichkin Roman)/Pods-Lesson1 (Shichkin Roman).debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +91,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08413A68D3AD5E4B744C3537 /* Pods_Lesson1__Shichkin_Roman_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FBBA597C6EDE23D1C076DFC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAFB8119F7F4AC2A1AB54C49 /* Pods-Lesson1 (Shichkin Roman).debug.xcconfig */,
+				57D2AE49489059B471595325 /* Pods-Lesson1 (Shichkin Roman).release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8B0D512D265D7C9600EB34E2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +137,15 @@
 				8B0D5138265D851700EB34E2 /* String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B0D513B2664164C00EB34E2 /* Lession-2 */ = {
+			isa = PBXGroup;
+			children = (
+				8B0D513C266416AF00EB34E2 /* AuthViewController.swift */,
+				8B0D513E26644D4E00EB34E2 /* VkAPI.swift */,
+			);
+			path = "Lession-2";
 			sourceTree = "<group>";
 		};
 		8B843DBC2637367D00AFE6CC /* NewsTableViewController */ = {
@@ -220,6 +247,8 @@
 			children = (
 				8B933D8E261C22A9008D967A /* Lesson1 (Shichkin Roman) */,
 				8B933D8D261C22A9008D967A /* Products */,
+				2FBBA597C6EDE23D1C076DFC /* Pods */,
+				C8E0FC6945BD015B77C8D6A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				8B0D512E265D7CAD00EB34E2 /* Lession-1 */,
+				8B0D513B2664164C00EB34E2 /* Lession-2 */,
 				8B90FD2F26279788000B4398 /* Model */,
 				8B933D8F261C22A9008D967A /* AppDelegate.swift */,
 				8B933D91261C22A9008D967A /* SceneDelegate.swift */,
@@ -265,6 +295,14 @@
 			path = GalleryHorisontalViewController;
 			sourceTree = "<group>";
 		};
+		C8E0FC6945BD015B77C8D6A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27D3C9BB450589CC49FB26BD /* Pods_Lesson1__Shichkin_Roman_.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -272,9 +310,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B933DA0261C22B2008D967A /* Build configuration list for PBXNativeTarget "Lesson1 (Shichkin Roman)" */;
 			buildPhases = (
+				98FDD0FC958086A82499B5AA /* [CP] Check Pods Manifest.lock */,
 				8B933D88261C22A9008D967A /* Sources */,
 				8B933D89261C22A9008D967A /* Frameworks */,
 				8B933D8A261C22A9008D967A /* Resources */,
+				89734E9AF10D39B28B547E36 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -335,6 +375,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		89734E9AF10D39B28B547E36 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lesson1 (Shichkin Roman)/Pods-Lesson1 (Shichkin Roman)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lesson1 (Shichkin Roman)/Pods-Lesson1 (Shichkin Roman)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lesson1 (Shichkin Roman)/Pods-Lesson1 (Shichkin Roman)-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98FDD0FC958086A82499B5AA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lesson1 (Shichkin Roman)-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B933D88261C22A9008D967A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -344,6 +426,7 @@
 				8B843DD0263A138D00AFE6CC /* iOSDevCenters+GIF.swift in Sources */,
 				8B90FD352628C254000B4398 /* FotoViewController.swift in Sources */,
 				8B843DBA2637336300AFE6CC /* News.swift in Sources */,
+				8B0D513F26644D4E00EB34E2 /* VkAPI.swift in Sources */,
 				8B843DBE263736E300AFE6CC /* NewsTableViewController.swift in Sources */,
 				8B90FD0B26276F21000B4398 /* TabBarController.swift in Sources */,
 				8B0D5139265D851700EB34E2 /* String.swift in Sources */,
@@ -357,6 +440,7 @@
 				8B933D92261C22A9008D967A /* SceneDelegate.swift in Sources */,
 				8B843DCC2639EA8E00AFE6CC /* Animations.swift in Sources */,
 				8B90FD0426276CF4000B4398 /* Group.swift in Sources */,
+				8B0D513D266416AF00EB34E2 /* AuthViewController.swift in Sources */,
 				8BCB3F2E26451242001F6C7B /* TransitionsManager.swift in Sources */,
 				8BCB3F29264164DC001F6C7B /* GalleryHorisontalView.swift in Sources */,
 				8B90FD0026276A5B000B4398 /* User.swift in Sources */,
@@ -507,6 +591,7 @@
 		};
 		8B933DA1261C22B2008D967A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAFB8119F7F4AC2A1AB54C49 /* Pods-Lesson1 (Shichkin Roman).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -526,6 +611,7 @@
 		};
 		8B933DA2261C22B2008D967A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57D2AE49489059B471595325 /* Pods-Lesson1 (Shichkin Roman).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

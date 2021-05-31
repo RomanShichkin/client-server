@@ -14,5 +14,5 @@ final class TokenAndIdService {
     static let shared = TokenAndIdService()
     
     var token: String = ""
-    var userId: Int = 0
+    var userId: String = ""
 }

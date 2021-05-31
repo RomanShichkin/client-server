@@ -100,8 +100,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        TokenAndIdService.shared.token = (login + password).sha256() //хэшируем строку, чтобы больше было похоже с виду на токен
-        TokenAndIdService.shared.userId = (login + password).count  //просто считаем количество символов
+//        TokenAndIdService.shared.token = (login + password).sha256() //хэшируем строку, чтобы больше было похоже с виду на токен
+//        TokenAndIdService.shared.userId = (login + password).count  //просто считаем количество символов
         
         print(TokenAndIdService.shared.token)
         print(TokenAndIdService.shared.userId)
