@@ -121,7 +121,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="ZzH-0r-Aic" id="zCx-8K-EO6"/>
-                        <segue destination="hCW-ZE-8Hm" kind="custom" identifier="fromAuthToTabBarSegue" id="9k6-Hu-3ye"/>
+                        <segue destination="hCW-ZE-8Hm" kind="presentation" identifier="fromAuthToTabBarSegue" modalPresentationStyle="fullScreen" id="9k6-Hu-3ye"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuI-4C-dKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

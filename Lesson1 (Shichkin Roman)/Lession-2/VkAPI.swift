@@ -6,176 +6,123 @@
 //
 
 import Foundation
+import Alamofire
 
-func apiGetUser(token: String, userId: String) {
-    var friendsUrlComponents = URLComponents()
-    friendsUrlComponents.scheme = "https"
-    friendsUrlComponents.host = "api.vk.com"
-    friendsUrlComponents.path = "/method/users.get"
-    friendsUrlComponents.queryItems = [
-        URLQueryItem(name: "user_ids", value: userId),
-        URLQueryItem(name: "fields", value: "bdate"),
-        URLQueryItem(name: "access_token", value: token),
-        URLQueryItem(name: "v", value: "5.131")
+private let baseUrl = "https://api.vk.com/method/"
+private let version = "5.131"
+
+// MARK: - Alamofire
+
+func apiGetUserAF(userId: String)  {
+    let path = "users.get"
+    
+    let parameters: Parameters = [
+        "user_ids": userId,
+        "fields": "bdate",
+        "access_token": TokenAndIdService.shared.token,
+        "v": version
+    ]
+    let url = baseUrl + path
+    
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.value else { return }
+        print(data.prettyJSON as Any)
+    }
+}
+
+func apiFriendsListAF(completion: @escaping ([FriendsItem]) -> Void) {
+    let path = "friends.get"
+    
+    let parameters: Parameters = [
+        "user_ids": TokenAndIdService.shared.userId,
+        "access_token": TokenAndIdService.shared.token,
+        "order": "hints",
+        "fields": "bdate,domain,photo_100",
+        "count": "3",
+        "v": version
     ]
     
-    let request = URLRequest(url: friendsUrlComponents.url!)
+    let url = baseUrl + path
     
-    let give = URLSession.shared
-    give.dataTask(with: request){ (data, response, error) in
-        if let response = response {
-            print("---------API USER-------------------------------------------------------")
-            print(response)
-        }
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.value else { return }
+        //        print(data.prettyJSON as Any)
+        let usersList = try! JSONDecoder().decode(FriendsListFromAPI.self, from: data).response.items
+        print(usersList as Any)
+        completion(usersList)
+    }
+}
+
+func apiUserPhotoAF(userId: String, completion: @escaping ([PhotoItem]) -> Void) {
+    let path = "photos.getAll"
+    
+    let parameters: Parameters = [
+        "owner_id": userId,
+        "access_token": TokenAndIdService.shared.token,
+        "extended": "1",
+        "v": version
+    ]
+    
+    let url = baseUrl + path
+    
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.value else { return }
+        let userPhotos = try! JSONDecoder().decode(UserPhotosFromAPI.self, from: data).response.items
+        print(userPhotos as Any)
+        completion(userPhotos)
+    }
+}
+
+func apiUserGroupsAF(completion: @escaping ([GroupItem]) -> Void) {
+    let path = "groups.get"
+    
+    let parameters: Parameters = [
+        "user_ids": TokenAndIdService.shared.userId,
+        "access_token": TokenAndIdService.shared.token,
+        "extended": "1",
+        "count": "3",
+        "v": version
+    ]
+    let url = baseUrl + path
+    
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.value else { return }
+        print(data.prettyJSON as Any)
         
-        guard let data = data else {return}
-        
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        } catch {
-            print(error)
-        }
-    }.resume()
+        let userGroups = try! JSONDecoder().decode(UserGroupsFromAPI.self, from: data).response.items
+        print(userGroups as Any)
+        completion(userGroups)
+    }
 }
 
-func apiFriendsList(token: String, userId: String) {
-    var friendsUrlComponents = URLComponents()
-    friendsUrlComponents.scheme = "https"
-    friendsUrlComponents.host = "api.vk.com"
-    friendsUrlComponents.path = "/method/friends.get"
-    friendsUrlComponents.queryItems = [
-        URLQueryItem(name: "user_ids", value: userId),
-        URLQueryItem(name: "access_token", value: token),
-        URLQueryItem(name: "order", value: "hints"),
-        URLQueryItem(name: "fields", value: "domain"),
-        URLQueryItem(name: "count", value: "3"),
-        URLQueryItem(name: "v", value: "5.131")
+func apiSearchGroupsAF(search: String) {
+    let path = "groups.search"
+    
+    let parameters: Parameters = [
+        "access_token": TokenAndIdService.shared.token,
+        "q": search,
+        "count": "3",
+        "v": version
     ]
+    let url = baseUrl + path
     
-    let request = URLRequest(url: friendsUrlComponents.url!)
-    
-    let give = URLSession.shared
-    give.dataTask(with: request)
-    { (data, response, error) in
-        if let response = response {
-            print("---------API FRIENDS LIST-------------------------------------------------------")
-            print(response)
-        }
-
-        guard let data = data else {return}
-
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        } catch {
-            print(error)
-        }
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.value else { return }
+        print(data.prettyJSON as Any)
     }
-        .resume()
-}
-
-
-func apiUserPhoto(token: String, userId: String) {
-    var friendsUrlComponents = URLComponents()
-    friendsUrlComponents.scheme = "https"
-    friendsUrlComponents.host = "api.vk.com"
-    friendsUrlComponents.path = "/method/photos.getAll"
-    friendsUrlComponents.queryItems = [
-        URLQueryItem(name: "owner_id", value: userId),
-        URLQueryItem(name: "access_token", value: token),
-        URLQueryItem(name: "extended", value: "1"),
-        URLQueryItem(name: "v", value: "5.131")
-    ]
-    
-    let request = URLRequest(url: friendsUrlComponents.url!)
-    
-    let give = URLSession.shared
-    give.dataTask(with: request)
-    { (data, response, error) in
-        if let response = response {
-            print("---------API USER PHOTO--------------------------------------------------------")
-            print(response)
-        }
-
-        guard let data = data else {return}
-
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        } catch {
-            print(error)
-        }
-    }
-        .resume()
-}
-
-func apiUserGroups(token: String, userId: String) {
-    var friendsUrlComponents = URLComponents()
-    friendsUrlComponents.scheme = "https"
-    friendsUrlComponents.host = "api.vk.com"
-    friendsUrlComponents.path = "/method/groups.get"
-    friendsUrlComponents.queryItems = [
-        URLQueryItem(name: "owner_id", value: userId),
-        URLQueryItem(name: "access_token", value: token),
-        URLQueryItem(name: "extended", value: "1"),
-        URLQueryItem(name: "count", value: "3"),
-        URLQueryItem(name: "v", value: "5.131")
-    ]
-    
-    let request = URLRequest(url: friendsUrlComponents.url!)
-    
-    let give = URLSession.shared
-    give.dataTask(with: request)
-    { (data, response, error) in
-        if let response = response {
-            print("---------API USER GROUPS-------------------------------------------------------")
-            print(response)
-        }
-
-        guard let data = data else {return}
-
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        } catch {
-            print(error)
-        }
-    }
-        .resume()
-}
-
-
-func apiSearchGroups(token: String) {
-    var friendsUrlComponents = URLComponents()
-    friendsUrlComponents.scheme = "https"
-    friendsUrlComponents.host = "api.vk.com"
-    friendsUrlComponents.path = "/method/groups.search"
-    friendsUrlComponents.queryItems = [
-        URLQueryItem(name: "access_token", value: token),
-        URLQueryItem(name: "q", value: "Music"),
-        URLQueryItem(name: "count", value: "3"),
-        URLQueryItem(name: "v", value: "5.131")
-    ]
-    
-    let request = URLRequest(url: friendsUrlComponents.url!)
-    
-    let give = URLSession.shared
-    give.dataTask(with: request)
-    { (data, response, error) in
-        if let response = response {
-            print("---------API SEARCH GROUPS-------------------------------------------------------")
-            print(response)
-        }
-
-        guard let data = data else {return}
-
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        } catch {
-            print(error)
-        }
-    }
-        .resume()
 }

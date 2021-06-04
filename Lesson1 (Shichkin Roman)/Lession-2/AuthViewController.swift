@@ -11,6 +11,8 @@ import WebKit
 class AuthViewController: UIViewController, WKNavigationDelegate {
 
     let fromAuthToTabBarSegue = "fromAuthToTabBarSegue"
+    let transitionManager = TransitionsManager()
+    var groupsList = [GroupItem]()
     
     @IBOutlet weak var webView: WKWebView!{
         didSet{
@@ -31,7 +33,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "7867804"),
+            URLQueryItem(name: "client_id", value: "7871459"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "262150"),
@@ -75,13 +77,33 @@ extension AuthViewController {
         print("---------USER ID-------------------------------------------------------")
         print(TokenAndIdService.shared.userId)
 
-        apiGetUser(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
-        apiFriendsList(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
-        apiUserPhoto(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
-        apiUserGroups(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
-        apiSearchGroups(token: TokenAndIdService.shared.token)
+//        apiGetUserAF(userId: TokenAndIdService.shared.userId)
+//        apiFriendsListAF()
+//        apiUserPhotoAF(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
+//        apiUserGroupsAF()
+        apiSearchGroupsAF(search: "Music")
+//        
+//        apiUserPhotoAF(userId: "143502972")
+        
+//        apiUserGroupsAF() {[weak self] groupsList in
+//            self?.groupsList = groupsList
+//        }
+//        print("_____________________________________")
+//        print(groupsList)
+//        apiGetUser(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
+//        apiFriendsList(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
+//        apiUserPhoto(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
+//        apiUserGroups(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
+//        apiSearchGroups(token: TokenAndIdService.shared.token)
+        
         
         decisionHandler(.cancel)
+        
+        performSegue(withIdentifier: self.fromAuthToTabBarSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.transitioningDelegate = transitionManager
     }
     
     @IBAction func exitToLogin(_ segue: UIStoryboardSegue) {
