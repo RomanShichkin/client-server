@@ -52,7 +52,7 @@ func apiFriendsListAF(completion: @escaping ([FriendsItem]) -> Void) {
                parameters: parameters
     ).responseData { response in
         guard let data = response.value else { return }
-        //        print(data.prettyJSON as Any)
+//                print(data.prettyJSON as Any)
         let usersList = try! JSONDecoder().decode(FriendsListFromAPI.self, from: data).response.items
         print(usersList as Any)
         completion(usersList)

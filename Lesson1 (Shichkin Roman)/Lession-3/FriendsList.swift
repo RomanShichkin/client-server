@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - FriendsListFromAPI
 struct FriendsListFromAPI: Codable {
@@ -21,7 +22,7 @@ struct FriendsResponse: Codable {
 // MARK: - Item
 struct FriendsItem: Codable {
     let canAccessClosed: Bool
-    let domain, bdate: String
+    let domain, bdate: String?
     let id: Int
     let photo100: String
     let lastName, trackCode: String

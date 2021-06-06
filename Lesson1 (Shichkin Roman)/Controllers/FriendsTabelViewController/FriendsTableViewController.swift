@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
@@ -16,16 +17,17 @@ class FriendsTableViewController: UITableViewController {
     var friendsList = [FriendsItem]()
     let dateFormatter = DateFormatter()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(Realm.Configuration.defaultConfiguration)
         self.tableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: friendsTableViewCellReuse)
         apiFriendsListAF() {[weak self] friendsList in
             self?.friendsList = friendsList
             self?.tableView?.reloadData()
         }
     }
+
+    
     
     
     // MARK: - Table view data source
@@ -38,6 +40,9 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 //        return DataStorage.shared.usersArray.count
+        saveFriendsRealm(friendsItemArray: friendsList)
+        loadFriendsRealm()
+        
         return friendsList.count
     }
 
@@ -48,6 +53,8 @@ class FriendsTableViewController: UITableViewController {
         let userKey = friendsList[indexPath.section]
         
         cell.configureWithUser(friends: friendsList[indexPath.row])
+        
+
         
 //        (user:  DataStorage.shared.usersArray[indexPath.row]) //userValues[indexPath.row])
         

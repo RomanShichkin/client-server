@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsController: UITableViewController {
 
@@ -35,8 +36,10 @@ class MyGroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return groupsList.count
         
+        saveGroupsRealm(groupsItemArray: groupsList)
+        loadGroupsRealm()
+        return groupsList.count
 //        return DataStorage.shared.myGroups.count
     }
 

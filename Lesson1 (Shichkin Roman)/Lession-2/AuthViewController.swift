@@ -81,7 +81,7 @@ extension AuthViewController {
 //        apiFriendsListAF()
 //        apiUserPhotoAF(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)
 //        apiUserGroupsAF()
-        apiSearchGroupsAF(search: "Music")
+//        apiSearchGroupsAF(search: "Music")
 //        
 //        apiUserPhotoAF(userId: "143502972")
         

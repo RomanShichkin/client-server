@@ -63,7 +63,13 @@ class FriendsTableViewCell: UITableViewCell {
             }
         }.resume()
         
-        descriptionLabel.text =  "ДР: " + friends.bdate
+        if friends.bdate != nil {
+            self.descriptionLabel.text =  "ДР: " + friends.bdate!
+        } else {
+            self.descriptionLabel.text = "Дата рождения не указана"
+        }
+
+//        descriptionLabel.text =  "ДР: " + friends.bdate
         nameLabel.text = friends.firstName + " " + friends.lastName
         
         shadowView.clipsToBounds = false
