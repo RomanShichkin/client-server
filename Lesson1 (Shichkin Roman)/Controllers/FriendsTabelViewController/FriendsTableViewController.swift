@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
@@ -13,12 +14,20 @@ class FriendsTableViewController: UITableViewController {
     let fromFriendsToFotosSegue = "fromFriendsToFotos"
     let userSectionsTitles = DataStorage.shared.userSections
     
+    var friendsList = [FriendsItem]()
+    let dateFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(Realm.Configuration.defaultConfiguration)
         self.tableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: friendsTableViewCellReuse)
-        
+        apiFriendsListAF() {[weak self] friendsList in
+            self?.friendsList = friendsList
+            self?.tableView?.reloadData()
+        }
     }
+
+    
     
     
     // MARK: - Table view data source
@@ -30,23 +39,32 @@ class FriendsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DataStorage.shared.usersArray.count
+//        return DataStorage.shared.usersArray.count
+        saveFriendsRealm(friendsItemArray: friendsList)
+        loadFriendsRealm()
+        
+        return friendsList.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendsTableViewCellReuse, for: indexPath) as? FriendsTableViewCell else { return UITableViewCell() }
-//        cell.configureWithUser(user: DataStorage.shared.usersArray[indexPath.row])
-        // Configure the cell...
+
+        let userKey = friendsList[indexPath.section]
         
-        let userKey = DataStorage.shared.userSections[indexPath.section]
-        if let userValues = DataStorage.shared.groupedUsers[userKey] {
+        cell.configureWithUser(friends: friendsList[indexPath.row])
+        
 
-            cell.configureWithUser(user:  DataStorage.shared.usersArray[indexPath.row]) //userValues[indexPath.row])
-            //Index out of range почему???
-//                                    DataStorage.shared.usersArray[indexPath.row])
-        }
-
+        
+//        (user:  DataStorage.shared.usersArray[indexPath.row]) //userValues[indexPath.row])
+        
+//        if let userValues = DataStorage.shared.groupedUsers[userKey] {
+//
+//            cell.configureWithUser(user:  DataStorage.shared.usersArray[indexPath.row]) //userValues[indexPath.row])
+//            //Index out of range почему???
+////                                    DataStorage.shared.usersArray[indexPath.row])
+//        }
+        
         return cell
     }
 
@@ -60,22 +78,22 @@ class FriendsTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == fromFriendsToFotosSegue {
-            guard let user = sender as? User,
+            guard let userId = sender as? String,
                   let destination = segue.destination as? FotosCollectionViewController
 
             else {
                 return
             }
-            destination.user = user
+            destination.userId = userId
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? FriendsTableViewCell,
-              let user = cell.saveUser
+              let userId = cell.saveUserId
         else { return }
         
-        performSegue(withIdentifier: fromFriendsToFotosSegue, sender: user)
+        performSegue(withIdentifier: fromFriendsToFotosSegue, sender: userId)
     }
     
 

@@ -16,7 +16,9 @@ class FotosCollectionViewController: UICollectionViewController {
     let minimumInteritemSpacing: CGFloat = 20
     let cellsPerRow = 2
     
+    var userPhotos = [PhotoItem]()
     var user: User?
+    var userId: String?
     
     let fotosCollectionViewCellReuse = "FotosCollectionViewCell"
     let openFriendFotoSegue = "openFriendFoto"
@@ -33,6 +35,10 @@ class FotosCollectionViewController: UICollectionViewController {
         fotoArray = array
         
         self.collectionView.register(UINib(nibName: "FotosCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: fotosCollectionViewCellReuse)
+        apiUserPhotoAF(userId: userId!) {[weak self] userPhotos in
+            self?.userPhotos = userPhotos
+            self?.collectionView?.reloadData()
+        }
         
     }
     
@@ -89,7 +95,7 @@ class FotosCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return fotoArray.count
+        return userPhotos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

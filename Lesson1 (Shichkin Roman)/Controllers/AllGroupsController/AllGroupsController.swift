@@ -62,7 +62,7 @@ class AllGroupsController: UITableViewController {
             visibleGroup = DataStorage.shared.allGroups[indexPath.row]
         }
         
-        cell.configureWithGroup(group: visibleGroup)
+//        cell.configureWithGroup(group: visibleGroup)
         
         return cell
     }
