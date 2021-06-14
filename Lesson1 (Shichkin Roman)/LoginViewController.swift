@@ -91,15 +91,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func pressLoginButton(_ sender: Any) {
-//        guard    let login = self.login.text,
-//                 let password = self.password.text,
-//                 login.trimmingCharacters(in: .whitespacesAndNewlines) == "admin",
-//                 password.trimmingCharacters(in: .whitespacesAndNewlines) == "admin"
-//        else {
-//            showAlert(alertText: "Неверный логин/пароль")
-//            return
-//        }
-
+        guard    let login = self.login.text,
+                 let password = self.password.text,
+                 login.trimmingCharacters(in: .whitespacesAndNewlines) == "admin",
+                 password.trimmingCharacters(in: .whitespacesAndNewlines) == "admin"
+        else {
+            showAlert(alertText: "Неверный логин/пароль")
+            return
+        }
+        
+//        TokenAndIdService.shared.token = (login + password).sha256() //хэшируем строку, чтобы больше было похоже с виду на токен
+//        TokenAndIdService.shared.userId = (login + password).count  //просто считаем количество символов
+        
+        print(TokenAndIdService.shared.token)
+        print(TokenAndIdService.shared.userId)
+        
         viewAnimation(segue: fromLoginToTabBarSegue)
 //        performSegue(withIdentifier: self.fromLoginToTabBarSegue, sender: self)
     }

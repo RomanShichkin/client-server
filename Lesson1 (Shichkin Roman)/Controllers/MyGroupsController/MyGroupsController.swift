@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsController: UITableViewController {
 
     let friendsTableViewCellReuse = "FriendsTableViewCell"
+    var groupsList = [GroupItem]()
+    var groupsListRealm = [GroupsRealm]()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -19,6 +22,12 @@ class MyGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: friendsTableViewCellReuse)
+        apiUserGroupsAF() {[weak self] groupsList in
+            self?.groupsList = groupsList
+            self?.tableView?.reloadData()
+        }
+        groupsListRealm = readGroupsRealm()
+        print(groupsListRealm)
     }
 
     // MARK: - Table view data source
@@ -30,12 +39,18 @@ class MyGroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DataStorage.shared.myGroups.count
+        
+        saveGroupsRealm(groupsItemArray: groupsList)
+        loadGroupsRealm()
+        return groupsList.count
+//        return DataStorage.shared.myGroups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendsTableViewCellReuse, for: indexPath) as? FriendsTableViewCell else { return UITableViewCell() }
-        cell.configureWithGroup(group: DataStorage.shared.myGroups[indexPath.row])
+        
+        cell.configureWithGroup(groups: groupsListRealm[indexPath.row])
+        
         // Configure the cell...
 
         return cell
