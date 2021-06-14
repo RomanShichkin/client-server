@@ -15,6 +15,7 @@ class FriendsTableViewController: UITableViewController {
     let userSectionsTitles = DataStorage.shared.userSections
     
     var friendsList = [FriendsItem]()
+    var friendsListRealm = [FriendsRealm]()
     let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
@@ -25,6 +26,8 @@ class FriendsTableViewController: UITableViewController {
             self?.friendsList = friendsList
             self?.tableView?.reloadData()
         }
+        friendsListRealm = readFriendsRealm()
+        print(friendsListRealm)
     }
 
     
@@ -41,20 +44,18 @@ class FriendsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
 //        return DataStorage.shared.usersArray.count
         saveFriendsRealm(friendsItemArray: friendsList)
-        loadFriendsRealm()
+//        loadFriendsRealm()
         
-        return friendsList.count
+        return friendsListRealm.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendsTableViewCellReuse, for: indexPath) as? FriendsTableViewCell else { return UITableViewCell() }
 
-        let userKey = friendsList[indexPath.section]
+//        let userKey = friendsList[indexPath.section]
         
-        cell.configureWithUser(friends: friendsList[indexPath.row])
-        
-
+        cell.configureWithUser(friends: friendsListRealm[indexPath.row])
         
 //        (user:  DataStorage.shared.usersArray[indexPath.row]) //userValues[indexPath.row])
         

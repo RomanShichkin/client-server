@@ -51,7 +51,7 @@ class FriendsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureWithUser(friends: FriendsItem) {
+    func configureWithUser(friends: FriendsRealm) {
         guard let url = URL(string: friends.photo100) else { return }
         let session = URLSession.shared
         
@@ -74,13 +74,13 @@ class FriendsTableViewCell: UITableViewCell {
         
         shadowView.clipsToBounds = false
         shadowView.backgroundColor = UIColor.darkGray
-        shadowView.layer.cornerRadius = mainImageView.frame.size.width / 0.8
+        shadowView.layer.cornerRadius = mainImageView.frame.size.width / 2.0
         shadowView.layer.shadowColor = myShadowColor.cgColor
         shadowView.layer.shadowOffset = CGSize.zero
         shadowView.layer.shadowRadius = myShadowRadius
         shadowView.layer.shadowOpacity = myShadowOpacity
 
-        mainImageView.layer.cornerRadius = mainImageView.frame.size.width / 0.8
+        mainImageView.layer.cornerRadius = mainImageView.frame.size.width / 2.0
         
         mainImageView.layer.shadowOffset = CGSize.zero
         mainImageView.layer.shadowRadius = 60
@@ -89,7 +89,7 @@ class FriendsTableViewCell: UITableViewCell {
         saveUserId = String(friends.id)
     }
     
-    func configureWithGroup(groups: GroupItem) {
+    func configureWithGroup(groups: GroupsRealm) {
         guard let url = URL(string: groups.photo100) else { return }
         let session = URLSession.shared
         

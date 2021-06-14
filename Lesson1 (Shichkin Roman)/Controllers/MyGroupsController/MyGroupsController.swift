@@ -12,6 +12,7 @@ class MyGroupsController: UITableViewController {
 
     let friendsTableViewCellReuse = "FriendsTableViewCell"
     var groupsList = [GroupItem]()
+    var groupsListRealm = [GroupsRealm]()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -25,6 +26,8 @@ class MyGroupsController: UITableViewController {
             self?.groupsList = groupsList
             self?.tableView?.reloadData()
         }
+        groupsListRealm = readGroupsRealm()
+        print(groupsListRealm)
     }
 
     // MARK: - Table view data source
@@ -46,7 +49,7 @@ class MyGroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendsTableViewCellReuse, for: indexPath) as? FriendsTableViewCell else { return UITableViewCell() }
         
-        cell.configureWithGroup(groups: groupsList[indexPath.row])
+        cell.configureWithGroup(groups: groupsListRealm[indexPath.row])
         
         // Configure the cell...
 
