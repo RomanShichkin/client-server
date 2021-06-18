@@ -51,7 +51,7 @@ func loadFriendsRealm() {
     do {
         let realm = try Realm(configuration: config)
         let friends = realm.objects(FriendsRealm.self)
-        print(friends.map { $0.firstName })
+//        print(friends.map { $0.firstName })
     } catch  {
         print(error)
     }
@@ -61,13 +61,25 @@ func readFriendsRealm() -> [FriendsRealm] {
     do {
         let realm = try Realm(configuration: config)
         let friends = realm.objects(FriendsRealm.self)
-        print(friends.map { $0.firstName })
+//        print(friends.map { $0.firstName })
         return Array(friends)
     } catch  {
         print(error)
         return []
     }
 }
+
+func readFriendsRealmNotif() -> Results<FriendsRealm>? {
+    do {
+        let realm = try Realm(configuration: config)
+        let friends = realm.objects(FriendsRealm.self)
+        return friends
+    } catch  {
+        print(error)
+        return nil
+    }
+}
+
 
 
 // MARK: - GroupsREALM
@@ -104,7 +116,7 @@ func loadGroupsRealm() {
     do {
         let realm = try Realm(configuration: config)
         let friends = realm.objects(GroupsRealm.self)
-        print(friends.map { $0.name })
+//        print(friends.map { $0.name })
     } catch  {
         print(error)
     }
@@ -114,10 +126,21 @@ func readGroupsRealm() -> [GroupsRealm] {
     do {
         let realm = try Realm(configuration: config)
         let groups = realm.objects(GroupsRealm.self)
-        print(groups.map { $0.name })
+//        print(groups.map { $0.name })
         return Array(groups)
     } catch  {
         print(error)
         return []
+    }
+}
+
+func readGroupsRealmNotif() -> Results<GroupsRealm>? {
+    do {
+        let realm = try Realm(configuration: config)
+        let groups = realm.objects(GroupsRealm.self)
+        return groups
+    } catch  {
+        print(error)
+        return nil
     }
 }

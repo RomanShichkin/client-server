@@ -14,6 +14,23 @@ class MyGroupsController: UITableViewController {
     var groupsList = [GroupItem]()
     var groupsListRealm = [GroupsRealm]()
     
+    var notificationToken: NotificationToken?
+    var groupsListRealmNotif: Results<GroupsRealm>?{
+        didSet {
+            notificationToken = groupsListRealmNotif?.observe{ changes in
+                switch changes {
+                case .initial(let results):
+                    print("Start to modified", results)
+                case .update(let results, let deletions, let insertions, let modifications):
+                    print("Friends modified", results)
+                case .error(let error):
+                    print("error", error.localizedDescription)
+                }
+                print("Friends were modified = ", self.groupsList)
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
@@ -26,7 +43,8 @@ class MyGroupsController: UITableViewController {
             self?.groupsList = groupsList
             self?.tableView?.reloadData()
         }
-        groupsListRealm = readGroupsRealm()
+        groupsListRealmNotif = readGroupsRealmNotif()
+        groupsListRealm = Array(groupsListRealmNotif!)
         print(groupsListRealm)
     }
 

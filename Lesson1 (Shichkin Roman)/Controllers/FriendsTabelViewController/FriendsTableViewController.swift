@@ -18,6 +18,24 @@ class FriendsTableViewController: UITableViewController {
     var friendsListRealm = [FriendsRealm]()
     let dateFormatter = DateFormatter()
     
+    var notificationToken: NotificationToken?
+    
+    var friendsListRealmNotif: Results<FriendsRealm>?{
+        didSet {
+            notificationToken = friendsListRealmNotif?.observe{ changes in
+                switch changes {
+                case .initial(let results):
+                    print("Start to modified", results)
+                case .update(let results, let deletions, let insertions, let modifications):
+                    print("Friends modified", results)
+                case .error(let error):
+                    print("error", error.localizedDescription)
+                }
+                print("Friends were modified = ", self.friendsList)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Realm.Configuration.defaultConfiguration)
@@ -26,8 +44,9 @@ class FriendsTableViewController: UITableViewController {
             self?.friendsList = friendsList
             self?.tableView?.reloadData()
         }
-        friendsListRealm = readFriendsRealm()
-        print(friendsListRealm)
+        friendsListRealmNotif = readFriendsRealmNotif()
+        friendsListRealm = Array(friendsListRealmNotif!)
+//        print(friendsListRealm)
     }
 
     
