@@ -7,9 +7,14 @@
 
 import UIKit
 import WebKit
+import Firebase
 
 class AuthViewController: UIViewController, WKNavigationDelegate {
 
+    private var userIDes = [UserID]()
+
+    private let ref = Database.database().reference(withPath: "userID") //создали контейнер для массива id
+    
     let fromAuthToTabBarSegue = "fromAuthToTabBarSegue"
     let transitionManager = TransitionsManager()
     var groupsList = [GroupItem]()
@@ -76,7 +81,16 @@ extension AuthViewController {
         print(TokenAndIdService.shared.token)
         print("---------USER ID-------------------------------------------------------")
         print(TokenAndIdService.shared.userId)
-
+        
+        //Создаем модель
+        let userID = UserID(userID: TokenAndIdService.shared.userId)
+        
+        //Создаем ссылку на id внутри Firebase (контейнер для конкретного id)
+        let userIDRef = self.ref.child(TokenAndIdService.shared.userId.lowercased())
+        
+        //Сохраняем dict в контейнер id
+        userIDRef.setValue(userID.toAnyObject())
+        
 //        apiGetUserAF(userId: TokenAndIdService.shared.userId)
 //        apiFriendsListAF()
 //        apiUserPhotoAF(token: TokenAndIdService.shared.token, userId: TokenAndIdService.shared.userId)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AvN-l9-azS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -20,7 +20,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPQ-P6-fGT">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6hR-Sb-9X7">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6hR-Sb-9X7">
                                         <rect key="frame" x="80" y="132" width="254" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="name"/>
@@ -39,7 +39,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyI-9z-ctI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyI-9z-ctI">
                                         <rect key="frame" x="180.5" y="100" width="53" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="53" id="ucQ-8V-3Yn"/>
@@ -59,6 +59,16 @@
                                             <action selector="pressLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ed0-pz-Low"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb9-wD-6Qa">
+                                        <rect key="frame" x="180" y="358" width="54" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="registrationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8NM-E7-jTP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="XyI-9z-ctI" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="1UZ-LG-mQ3"/>
@@ -66,6 +76,7 @@
                                     <constraint firstItem="6hR-Sb-9X7" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="6Z2-fi-YP3"/>
                                     <constraint firstAttribute="trailing" secondItem="XlR-Ty-czW" secondAttribute="trailing" constant="190.33333333333334" id="A8m-nO-Olp"/>
                                     <constraint firstItem="wCK-RL-u1q" firstAttribute="top" secondItem="0fn-5w-LWG" secondAttribute="bottom" constant="8" symbolic="YES" id="BOa-Jo-ahb"/>
+                                    <constraint firstItem="hb9-wD-6Qa" firstAttribute="centerX" secondItem="XlR-Ty-czW" secondAttribute="centerX" id="JVz-wC-oDV"/>
                                     <constraint firstItem="XlR-Ty-czW" firstAttribute="top" secondItem="wCK-RL-u1q" secondAttribute="bottom" constant="40" id="Kii-zL-usw"/>
                                     <constraint firstItem="0fn-5w-LWG" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="MYi-y6-UGl"/>
                                     <constraint firstAttribute="bottom" secondItem="XlR-Ty-czW" secondAttribute="bottom" constant="518" id="OP6-7E-RYb"/>
@@ -74,6 +85,7 @@
                                     <constraint firstItem="XlR-Ty-czW" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="Zzm-bX-b4k"/>
                                     <constraint firstItem="0fn-5w-LWG" firstAttribute="top" secondItem="6hR-Sb-9X7" secondAttribute="bottom" constant="28" id="aEq-2k-qYt"/>
                                     <constraint firstItem="XyI-9z-ctI" firstAttribute="top" secondItem="RPQ-P6-fGT" secondAttribute="top" constant="100" id="d5V-7L-IgA"/>
+                                    <constraint firstItem="hb9-wD-6Qa" firstAttribute="top" secondItem="XlR-Ty-czW" secondAttribute="bottom" constant="28" id="fIe-n4-vJc"/>
                                     <constraint firstItem="XyI-9z-ctI" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="lZa-vM-SFx"/>
                                     <constraint firstItem="wCK-RL-u1q" firstAttribute="centerX" secondItem="RPQ-P6-fGT" secondAttribute="centerX" id="sR3-6R-SQs"/>
                                 </constraints>
@@ -91,12 +103,12 @@
                     <connections>
                         <outlet property="login" destination="6hR-Sb-9X7" id="i4Z-94-E35"/>
                         <outlet property="password" destination="wCK-RL-u1q" id="2gQ-5F-Kwi"/>
-                        <segue destination="hCW-ZE-8Hm" kind="presentation" identifier="fromLoginToTabBarSegue" modalPresentationStyle="fullScreen" id="Yh7-Kq-fII"/>
+                        <segue destination="AvN-l9-azS" kind="presentation" identifier="fromLoginToTabBarSegue" modalPresentationStyle="fullScreen" id="lAh-II-ihs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="-653"/>
+            <point key="canvasLocation" x="-858" y="100"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="8Fe-cc-giH">
@@ -119,6 +131,7 @@
                         <viewLayoutGuide key="safeArea" id="zys-fN-Tbw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EPa-IG-GNS"/>
                     <connections>
                         <outlet property="webView" destination="ZzH-0r-Aic" id="zCx-8K-EO6"/>
                         <segue destination="hCW-ZE-8Hm" kind="presentation" identifier="fromAuthToTabBarSegue" modalPresentationStyle="fullScreen" id="9k6-Hu-3ye"/>
@@ -410,9 +423,6 @@
             <point key="canvasLocation" x="777" y="101"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="9k6-Hu-3ye"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="newspaper.fill" catalog="system" width="128" height="111"/>

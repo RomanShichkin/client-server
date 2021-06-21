@@ -24,6 +24,9 @@
 		8B843DCC2639EA8E00AFE6CC /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843DCB2639EA8E00AFE6CC /* Animations.swift */; };
 		8B843DD0263A138D00AFE6CC /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843DCF263A138D00AFE6CC /* iOSDevCenters+GIF.swift */; };
 		8B843E05263A293A00AFE6CC /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8B843E04263A293A00AFE6CC /* loading.gif */; };
+		8B8776DB2680B5300059370B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B8776DA2680B5300059370B /* GoogleService-Info.plist */; };
+		8B8776DE2680CFC00059370B /* UserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8776DD2680CFC00059370B /* UserID.swift */; };
+		8B8776E02680D8900059370B /* GroupsID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8776DF2680D8900059370B /* GroupsID.swift */; };
 		8B90FCFD262769D2000B4398 /* SetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90FCFC262769D2000B4398 /* SetUp.swift */; };
 		8B90FD0026276A5B000B4398 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90FCFF26276A5B000B4398 /* User.swift */; };
 		8B90FD0426276CF4000B4398 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B90FD0326276CF4000B4398 /* Group.swift */; };
@@ -68,6 +71,9 @@
 		8B843DCB2639EA8E00AFE6CC /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		8B843DCF263A138D00AFE6CC /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 		8B843E04263A293A00AFE6CC /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		8B8776DA2680B5300059370B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8B8776DD2680CFC00059370B /* UserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserID.swift; sourceTree = "<group>"; };
+		8B8776DF2680D8900059370B /* GroupsID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsID.swift; sourceTree = "<group>"; };
 		8B90FCFC262769D2000B4398 /* SetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUp.swift; sourceTree = "<group>"; };
 		8B90FCFF26276A5B000B4398 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8B90FD0326276CF4000B4398 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -195,6 +201,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8B8776DC2680B8D90059370B /* Lession-8 */ = {
+			isa = PBXGroup;
+			children = (
+				8B933D93261C22A9008D967A /* LoginViewController.swift */,
+				8B8776DD2680CFC00059370B /* UserID.swift */,
+				8B8776DF2680D8900059370B /* GroupsID.swift */,
+			);
+			path = "Lession-8";
+			sourceTree = "<group>";
+		};
 		8B90FD1026277549000B4398 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,10 +312,10 @@
 				8B0D513B2664164C00EB34E2 /* Lession-2 */,
 				8B0D514026687A6300EB34E2 /* Lession-3 */,
 				8B0D514D266D630700EB34E2 /* Lession-4 */,
+				8B8776DC2680B8D90059370B /* Lession-8 */,
 				8B90FD2F26279788000B4398 /* Model */,
 				8B933D8F261C22A9008D967A /* AppDelegate.swift */,
 				8B933D91261C22A9008D967A /* SceneDelegate.swift */,
-				8B933D93261C22A9008D967A /* LoginViewController.swift */,
 				8B0D513A265D851E00EB34E2 /* Extensions */,
 				8B933D95261C22A9008D967A /* Main.storyboard */,
 				8B90FD1026277549000B4398 /* Controllers */,
@@ -308,6 +324,7 @@
 				8B933D98261C22B2008D967A /* Assets.xcassets */,
 				8B933D9A261C22B2008D967A /* LaunchScreen.storyboard */,
 				8B933D9D261C22B2008D967A /* Info.plist */,
+				8B8776DA2680B5300059370B /* GoogleService-Info.plist */,
 				8B843E04263A293A00AFE6CC /* loading.gif */,
 				8B843DCB2639EA8E00AFE6CC /* Animations.swift */,
 				8B843DCF263A138D00AFE6CC /* iOSDevCenters+GIF.swift */,
@@ -395,6 +412,7 @@
 			files = (
 				8BCB3F2A264164DC001F6C7B /* GalleryHorisontalView.xib in Resources */,
 				8B933D9C261C22B2008D967A /* LaunchScreen.storyboard in Resources */,
+				8B8776DB2680B5300059370B /* GoogleService-Info.plist in Resources */,
 				8B933D99261C22B2008D967A /* Assets.xcassets in Resources */,
 				8B933D97261C22A9008D967A /* Main.storyboard in Resources */,
 				8B90FD2226278689000B4398 /* FotosCollectionViewCell.xib in Resources */,
@@ -472,6 +490,7 @@
 				8B90FD2C2627918A000B4398 /* AllGroupsController.swift in Sources */,
 				8B0D514F266D632A00EB34E2 /* Realm.swift in Sources */,
 				8B933D92261C22A9008D967A /* SceneDelegate.swift in Sources */,
+				8B8776DE2680CFC00059370B /* UserID.swift in Sources */,
 				8B843DCC2639EA8E00AFE6CC /* Animations.swift in Sources */,
 				8B90FD0426276CF4000B4398 /* Group.swift in Sources */,
 				8B0D513D266416AF00EB34E2 /* AuthViewController.swift in Sources */,
@@ -483,6 +502,7 @@
 				8B90FD0826276D11000B4398 /* DataStorage.swift in Sources */,
 				8B0D514226687EA100EB34E2 /* Data+PrettyJSON.swift in Sources */,
 				8B90FD2126278689000B4398 /* FotosCollectionViewCell.swift in Sources */,
+				8B8776E02680D8900059370B /* GroupsID.swift in Sources */,
 				8B90FCFD262769D2000B4398 /* SetUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

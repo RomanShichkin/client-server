@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -16,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var blueView = UIView()
     let loadingGif = UIImage.gifImageWithName("loading")
     let transitionManager = TransitionsManager()
+    private var token: AuthStateDidChangeListenerHandle!
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -42,6 +44,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         blueView.backgroundColor = #colorLiteral(red: 0.03921568627, green: 0.5176470588, blue: 1, alpha: 1)
         blueView.frame = self.view.frame
+        
+        token = Auth.auth().addStateDidChangeListener{ [weak self] auth, user in
+            guard user != nil else { return }
+            self?.performSegue(withIdentifier: self!.fromLoginToTabBarSegue, sender: self)
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -76,38 +83,64 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         )
     }
     
-    func showAlert(alertText: String) {
-        let alertController = UIAlertController(title: "Error", message: alertText, preferredStyle: UIAlertController.Style.alert)
-        let actionButton = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.cancel, handler: {_ in
-            self.login.text = ""
-            self.password.text = ""
-        })
-        alertController.addAction(actionButton)
-        present(alertController, animated: true, completion: nil)
+    private func showAlert(title: String?, text: String?) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        let okControl = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okControl)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.transitioningDelegate = transitionManager
     }
     
-    @IBAction func pressLoginButton(_ sender: Any) {
-        guard    let login = self.login.text,
-                 let password = self.password.text,
-                 login.trimmingCharacters(in: .whitespacesAndNewlines) == "admin",
-                 password.trimmingCharacters(in: .whitespacesAndNewlines) == "admin"
+//    MARK: - Actions
+    
+    @IBAction func pressLoginButton(_ sender: Any?) {
+        guard    let login = self.login.text, !login.isEmpty,
+                 let password = self.password.text, !password.isEmpty
         else {
-            showAlert(alertText: "Неверный логин/пароль")
+            showAlert(title: "Ошибка ввода логина/пароля", text: "Не введено")
             return
+        }
+        
+        Auth.auth().signIn(withEmail: login, password: password) { [weak self] authResult , error in
+            if let error = error {
+                self?.showAlert(title: "Ошибка Firebase", text: error.localizedDescription)
+            } else {
+                self?.performSegue(withIdentifier: self!.fromLoginToTabBarSegue, sender: self)
+            }
+            
         }
         
 //        TokenAndIdService.shared.token = (login + password).sha256() //хэшируем строку, чтобы больше было похоже с виду на токен
 //        TokenAndIdService.shared.userId = (login + password).count  //просто считаем количество символов
-        
-        print(TokenAndIdService.shared.token)
-        print(TokenAndIdService.shared.userId)
-        
-        viewAnimation(segue: fromLoginToTabBarSegue)
+//
+//        print(TokenAndIdService.shared.token)
+//        print(TokenAndIdService.shared.userId)
+//        
+//        viewAnimation(segue: fromLoginToTabBarSegue)
 //        performSegue(withIdentifier: self.fromLoginToTabBarSegue, sender: self)
+    }
+    
+    
+    @IBAction func registrationAction(_ sender: Any) {
+        
+        guard    let login = self.login.text, !login.isEmpty,
+                 let password = self.password.text, !password.isEmpty
+        else {
+            showAlert(title: "Ошибка ввода логина/пароля", text: "Не введено")
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: login, password: password) { [weak self] authResult , error in
+            if let error = error {
+                self?.showAlert(title: "Ошибка Firebase", text: error.localizedDescription)
+            } else {
+                self?.pressLoginButton(nil)
+            }
+        }
+        
     }
     
     @IBAction func exitToLogin(_ segue: UIStoryboardSegue) {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>985805482151-vgnlho5ttc9p903fqv1fu4u6vepn3thj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.985805482151-vgnlho5ttc9p903fqv1fu4u6vepn3thj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAEEn8btnYcD7UncRp1m3h6CKq4Fe88hIg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>985805482151</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Roman-Shichkin.Lesson1--Shichkin-Roman-</string>
+	<key>PROJECT_ID</key>
+	<string>gbclient-server</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gbclient-server.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:985805482151:ios:746f43d8c4e40cd8bbd382</string>
+</dict>
+</plist>

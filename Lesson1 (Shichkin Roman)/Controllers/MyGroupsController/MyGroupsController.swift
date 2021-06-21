@@ -7,12 +7,16 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 class MyGroupsController: UITableViewController {
 
     let friendsTableViewCellReuse = "FriendsTableViewCell"
     var groupsList = [GroupItem]()
     var groupsListRealm = [GroupsRealm]()
+    
+    private let ref = Database.database().reference(withPath: "userID") //создали контейнер для массива id
+    private var groupsIDes = [GroupsID]()
     
     var notificationToken: NotificationToken?
     var groupsListRealmNotif: Results<GroupsRealm>?{
@@ -46,8 +50,22 @@ class MyGroupsController: UITableViewController {
         groupsListRealmNotif = readGroupsRealmNotif()
         groupsListRealm = Array(groupsListRealmNotif!)
         print(groupsListRealm)
+        
+        let groupID = GroupsID(groupsID: configureGroup(groups: groupsListRealm))
+        //Создаем ссылку на id внутри Firebase (контейнер для конкретного id)
+        let userIDRef = self.ref.child(TokenAndIdService.shared.userId.lowercased())
+        //Сохраняем dict в контейнер id
+        userIDRef.setValue(groupID.toAnyObject())
     }
-
+    
+    func configureGroup(groups: [GroupsRealm]) -> [String] {
+        var arrayGroupId: [String] = []
+        for i in groups {
+            arrayGroupId.append(String(i.id))
+        }
+        return arrayGroupId
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 class FriendsTableViewController: UITableViewController {
 
@@ -116,7 +117,7 @@ class FriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: fromFriendsToFotosSegue, sender: userId)
     }
     
-
+    
 //    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
 //        return
 //    }
