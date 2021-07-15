@@ -6,10 +6,34 @@
 //
 
 import UIKit
+import RealmSwift
+import Firebase
 
 class MyGroupsController: UITableViewController {
 
     let friendsTableViewCellReuse = "FriendsTableViewCell"
+    var groupsList = [GroupItem]()
+    var groupsListRealm = [GroupsRealm]()
+    
+    private let ref = Database.database().reference(withPath: "userID") //создали контейнер для массива id
+    private var groupsIDes = [GroupsID]()
+    
+    var notificationToken: NotificationToken?
+    var groupsListRealmNotif: Results<GroupsRealm>?{
+        didSet {
+            notificationToken = groupsListRealmNotif?.observe{ changes in
+                switch changes {
+                case .initial(let results):
+                    print("Start to modified", results)
+                case .update(let results, let deletions, let insertions, let modifications):
+                    print("Friends modified", results)
+                case .error(let error):
+                    print("error", error.localizedDescription)
+                }
+                print("Friends were modified = ", self.groupsList)
+            }
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -19,8 +43,29 @@ class MyGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: friendsTableViewCellReuse)
+        apiUserGroupsAF() {[weak self] groupsList in
+            self?.groupsList = groupsList
+            self?.tableView?.reloadData()
+        }
+        groupsListRealmNotif = readGroupsRealmNotif()
+        groupsListRealm = Array(groupsListRealmNotif!)
+        print(groupsListRealm)
+        
+        let groupID = GroupsID(groupsID: configureGroup(groups: groupsListRealm))
+        //Создаем ссылку на id внутри Firebase (контейнер для конкретного id)
+        let userIDRef = self.ref.child(TokenAndIdService.shared.userId.lowercased())
+        //Сохраняем dict в контейнер id
+        userIDRef.setValue(groupID.toAnyObject())
     }
-
+    
+    func configureGroup(groups: [GroupsRealm]) -> [String] {
+        var arrayGroupId: [String] = []
+        for i in groups {
+            arrayGroupId.append(String(i.id))
+        }
+        return arrayGroupId
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -30,12 +75,18 @@ class MyGroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DataStorage.shared.myGroups.count
+        
+        saveGroupsRealm(groupsItemArray: groupsList)
+        loadGroupsRealm()
+        return groupsList.count
+//        return DataStorage.shared.myGroups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendsTableViewCellReuse, for: indexPath) as? FriendsTableViewCell else { return UITableViewCell() }
-        cell.configureWithGroup(group: DataStorage.shared.myGroups[indexPath.row])
+        
+        cell.configureWithGroup(groups: groupsListRealm[indexPath.row])
+        
         // Configure the cell...
 
         return cell

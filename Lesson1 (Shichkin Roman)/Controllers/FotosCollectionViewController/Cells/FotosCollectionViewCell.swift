@@ -35,6 +35,21 @@ class FotosCollectionViewCell: UICollectionViewCell {
         fotoImage.image = image
         savedImage = image
     }
+    
+//    func configure(photos: PhotoItem) {
+//        
+//        guard let url = URL(string: photos.sizes) else { return }
+//    let session = URLSession.shared
+//    
+//    session.dataTask(with: url) { (data, response, error) in
+//        if let data = data, let image = UIImage(data: data) {
+//            DispatchQueue.main.async {
+//                self.fotoImage.image = image
+//            }
+//        }
+//    }.resume()
+//    }
+    
 
     
     @IBAction func pressLikeButton(_ sender: Any) {
