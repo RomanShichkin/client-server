@@ -29,7 +29,7 @@ func apiGetUserAF(userId: String)  {
                parameters: parameters
     ).responseData { response in
         guard let data = response.value else { return }
-        print(data.prettyJSON as Any)
+//        print(data.prettyJSON as Any)
     }
 }
 
@@ -77,7 +77,7 @@ func apiUserPhotoAF(userId: String, completion: @escaping ([PhotoItem]) -> Void)
     ).responseData { response in
         guard let data = response.value else { return }
         let userPhotos = try! JSONDecoder().decode(UserPhotosFromAPI.self, from: data).response.items
-        print(userPhotos as Any)
+//        print(userPhotos as Any)
         completion(userPhotos)
     }
 }
@@ -102,7 +102,7 @@ func apiUserGroupsAF(completion: @escaping ([GroupItem]) -> Void) {
         print(data.prettyJSON as Any)
         
         let userGroups = try! JSONDecoder().decode(UserGroupsFromAPI.self, from: data).response.items
-        print(userGroups as Any)
+//        print(userGroups as Any)
         completion(userGroups)
     }
 }
@@ -123,6 +123,28 @@ func apiSearchGroupsAF(search: String) {
                parameters: parameters
     ).responseData { response in
         guard let data = response.value else { return }
+//        print(data.prettyJSON as Any)
+    }
+}
+
+func apiNewsFeedPostAF() {
+    let path = "newsfeed.get"
+    
+    let parameters: Parameters = [
+        "user_ids": TokenAndIdService.shared.userId,
+        "access_token": TokenAndIdService.shared.token,
+        "filters": "post",
+        "count": "1",
+        "v": version
+    ]
+    
+    let url = baseUrl + path
+    
+    AF.request(url,
+               method: .get,
+               parameters: parameters
+    ).responseData { response in
+        guard let data = response.data else { return }
         print(data.prettyJSON as Any)
     }
 }
