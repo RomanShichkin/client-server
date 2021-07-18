@@ -18,6 +18,8 @@ class FriendsTableViewController: UITableViewController {
     var friendsList = [FriendsItem]()
     var friendsListRealm = [FriendsRealm]()
     let dateFormatter = DateFormatter()
+    let queue = OperationQueue()
+    
     
     var notificationToken: NotificationToken?
     
@@ -63,8 +65,10 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 //        return DataStorage.shared.usersArray.count
-        saveFriendsRealm(friendsItemArray: friendsList)
-//        loadFriendsRealm()
+        
+        let saveFriendsRealmOp = SaveRealmOperation(item: friendsList)
+        queue.addOperation(saveFriendsRealmOp)
+//        saveFriendsRealm(friendsItemArray: friendsList)
         
         return friendsListRealm.count
     }

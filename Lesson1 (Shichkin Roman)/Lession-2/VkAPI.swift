@@ -10,6 +10,7 @@ import Alamofire
 
 private let baseUrl = "https://api.vk.com/method/"
 private let version = "5.131"
+private let queue = OperationQueue()
 
 // MARK: - Alamofire
 
@@ -47,7 +48,7 @@ func apiFriendsListAF(completion: @escaping ([FriendsItem]) -> Void) {
     
     let url = baseUrl + path
     
-    AF.request(url,
+    let request = AF.request(url,
                method: .get,
                parameters: parameters
     ).responseData { response in
@@ -57,6 +58,12 @@ func apiFriendsListAF(completion: @escaping ([FriendsItem]) -> Void) {
         print(usersList as Any)
         completion(usersList)
     }
+    
+    let getDataOperation = GetDataOperation(request: request)
+    getDataOperation.completionBlock = { [weak getDataOperation] in
+        print(getDataOperation?.data.flatMap { String(data: $0, encoding: .utf8) })
+    }
+    queue.addOperation(getDataOperation)
 }
 
 func apiUserPhotoAF(userId: String, completion: @escaping ([PhotoItem]) -> Void) {

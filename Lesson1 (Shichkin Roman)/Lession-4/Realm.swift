@@ -42,7 +42,7 @@ func saveFriendsRealm(friendsItemArray: [FriendsItem]) {
             try realm.commitWrite()
             print(realm.configuration.fileURL)
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 }
@@ -53,7 +53,7 @@ func loadFriendsRealm() {
         let friends = realm.objects(FriendsRealm.self)
 //        print(friends.map { $0.firstName })
     } catch  {
-        print(error)
+        print(error.localizedDescription)
     }
 }
 
@@ -64,7 +64,7 @@ func readFriendsRealm() -> [FriendsRealm] {
 //        print(friends.map { $0.firstName })
         return Array(friends)
     } catch  {
-        print(error)
+        print(error.localizedDescription)
         return []
     }
 }
@@ -75,7 +75,7 @@ func readFriendsRealmNotif() -> Results<FriendsRealm>? {
         let friends = realm.objects(FriendsRealm.self)
         return friends
     } catch  {
-        print(error)
+        print(error.localizedDescription)
         return nil
     }
 }
@@ -107,7 +107,7 @@ func saveGroupsRealm(groupsItemArray: [GroupItem]) {
             realm.add(grpRlm, update: Realm.UpdatePolicy.modified)
             try realm.commitWrite()
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 }
@@ -118,7 +118,7 @@ func loadGroupsRealm() {
         let friends = realm.objects(GroupsRealm.self)
 //        print(friends.map { $0.name })
     } catch  {
-        print(error)
+        print(error.localizedDescription)
     }
 }
 
@@ -129,7 +129,7 @@ func readGroupsRealm() -> [GroupsRealm] {
 //        print(groups.map { $0.name })
         return Array(groups)
     } catch  {
-        print(error)
+        print(error.localizedDescription)
         return []
     }
 }
@@ -140,7 +140,7 @@ func readGroupsRealmNotif() -> Results<GroupsRealm>? {
         let groups = realm.objects(GroupsRealm.self)
         return groups
     } catch  {
-        print(error)
+        print(error.localizedDescription)
         return nil
     }
 }
