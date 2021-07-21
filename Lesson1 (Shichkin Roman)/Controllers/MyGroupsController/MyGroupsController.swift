@@ -43,10 +43,8 @@ class MyGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: friendsTableViewCellReuse)
-        apiUserGroupsAF() {[weak self] groupsList in
-            self?.groupsList = groupsList
-            self?.tableView?.reloadData()
-        }
+
+        getDataPromise()
         groupsListRealmNotif = readGroupsRealmNotif()
         groupsListRealm = Array(groupsListRealmNotif!)
         print(groupsListRealm)
@@ -56,6 +54,33 @@ class MyGroupsController: UITableViewController {
         let userIDRef = self.ref.child(TokenAndIdService.shared.userId.lowercased())
         //Сохраняем dict в контейнер id
         userIDRef.setValue(groupID.toAnyObject())
+    }
+    
+    private func getDataAF() {
+        apiUserGroupsAF() {[weak self] groupsList in
+            self?.groupsList = groupsList
+            self?.tableView?.reloadData()
+        }
+    }
+    
+    private func getDataPromise() {
+        promiseUserGroups()
+            .get{ [weak self] groupsList in
+                self?.groupsList = groupsList
+                self?.tableView?.reloadData()
+            }
+            .catch { error in
+                self.showError(error)
+            }
+            .finally {
+                print("promiseUserGroups DONE!")
+            }
+    }
+    
+    private func showError(_ error: Error) {
+        let vc = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        vc.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+        self.present(vc, animated: true)
     }
     
     func configureGroup(groups: [GroupsRealm]) -> [String] {
@@ -78,7 +103,7 @@ class MyGroupsController: UITableViewController {
         
         saveGroupsRealm(groupsItemArray: groupsList)
         loadGroupsRealm()
-        return groupsList.count
+        return groupsListRealm.count
 //        return DataStorage.shared.myGroups.count
     }
 

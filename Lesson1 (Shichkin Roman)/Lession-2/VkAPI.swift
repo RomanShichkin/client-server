@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 private let baseUrl = "https://api.vk.com/method/"
 private let version = "5.131"
@@ -112,6 +113,34 @@ func apiUserGroupsAF(completion: @escaping ([GroupItem]) -> Void) {
 //        print(userGroups as Any)
         completion(userGroups)
     }
+}
+
+func promiseUserGroups() -> Promise<[GroupItem]> {
+    let path = "groups.get"
+    
+    let parameters: Parameters = [
+        "user_ids": TokenAndIdService.shared.userId,
+        "access_token": TokenAndIdService.shared.token,
+        "extended": "1",
+        "count": "4",
+        "v": version
+    ]
+    let url = baseUrl + path
+    
+    let promise = Promise<Data>  { resolver in
+        AF.request(url,
+                   method: .get,
+                   parameters: parameters
+        ).responseData { response in
+            guard let data = response.value else { return }
+            print(data.prettyJSON as Any)
+            resolver.fulfill(data)
+        }
+    }
+    .map { data in
+        return try! JSONDecoder().decode(UserGroupsFromAPI.self, from: data).response.items
+    }
+    return promise
 }
 
 func apiSearchGroupsAF(search: String) {
