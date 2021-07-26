@@ -56,12 +56,15 @@ class FriendsTableViewCell: UITableViewCell {
         let session = URLSession.shared
         
         session.dataTask(with: url) { (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
+            if let data = data, let _ = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.mainImageView.image = image
+                    self.mainImageView.setImage(at: url)
+//                    self.mainImageView.image = image
                 }
             }
         }.resume()
+        
+        
         
         if friends.bdate != nil {
             self.descriptionLabel.text =  "ДР: " + friends.bdate!
@@ -94,9 +97,10 @@ class FriendsTableViewCell: UITableViewCell {
         let session = URLSession.shared
         
         session.dataTask(with: url) { (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
+            if let data = data, let _ = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.mainImageView.image = image
+                    self.mainImageView.setImage(at: url)
+//                    self.mainImageView.image = image
                 }
             }
         }.resume()

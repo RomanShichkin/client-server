@@ -20,7 +20,6 @@ class FriendsTableViewController: UITableViewController {
     let dateFormatter = DateFormatter()
     let queue = OperationQueue()
     
-    
     var notificationToken: NotificationToken?
     
     var friendsListRealmNotif: Results<FriendsRealm>?{
