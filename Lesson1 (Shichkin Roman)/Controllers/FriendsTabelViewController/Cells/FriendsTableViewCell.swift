@@ -15,8 +15,14 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var BackView: UIView!
     @IBOutlet weak var shadowView: UIView!
     
-    var saveUser: User?
+    var saveUserId: String?
     var saveGroup: Group?
+    
+    static let dateFormatter: DateFormatter = {
+           let df = DateFormatter()
+           df.dateFormat = "dd.MM.yyyy HH.mm"
+           return df
+       }()
     
     @IBInspectable var myShadowColor: UIColor = UIColor.black
     @IBInspectable var myShadowRadius: CGFloat = 10
@@ -26,7 +32,7 @@ class FriendsTableViewCell: UITableViewCell {
         mainImageView.image = nil
         nameLabel.text = nil
         descriptionLabel.text = nil
-        saveUser = nil
+        saveUserId = ""
         saveGroup = nil
     }
     
@@ -45,48 +51,74 @@ class FriendsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureWithUser(user: User) {
-        if let image = user.avatar {
-            mainImageView.image = image
+    func configureWithUser(friends: FriendsRealm) {
+        guard let url = URL(string: friends.photo100) else { return }
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) { (data, response, error) in
+            if let data = data, let _ = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.mainImageView.setImage(at: url)
+//                    self.mainImageView.image = image
+                }
+            }
+        }.resume()
+        
+        
+        
+        if friends.bdate != nil {
+            self.descriptionLabel.text =  "ДР: " + friends.bdate!
+        } else {
+            self.descriptionLabel.text = "Дата рождения не указана"
         }
 
-        nameLabel.text = user.name
-        
-        if let age = user.age {
-        descriptionLabel.text = "Возраст: " + String(age)
-        }
+//        descriptionLabel.text =  "ДР: " + friends.bdate
+        nameLabel.text = friends.firstName + " " + friends.lastName
         
         shadowView.clipsToBounds = false
         shadowView.backgroundColor = UIColor.darkGray
-        shadowView.layer.cornerRadius = mainImageView.frame.size.width / 0.8
+        shadowView.layer.cornerRadius = mainImageView.frame.size.width / 2.0
         shadowView.layer.shadowColor = myShadowColor.cgColor
         shadowView.layer.shadowOffset = CGSize.zero
         shadowView.layer.shadowRadius = myShadowRadius
         shadowView.layer.shadowOpacity = myShadowOpacity
 
-//        mainImageView.clipsToBounds = false
-        mainImageView.image = user.avatar
-        mainImageView.layer.cornerRadius = mainImageView.frame.size.width / 0.8
+        mainImageView.layer.cornerRadius = mainImageView.frame.size.width / 2.0
         
         mainImageView.layer.shadowOffset = CGSize.zero
         mainImageView.layer.shadowRadius = 60
         mainImageView.layer.shadowOpacity = 2
 
-        saveUser = user
+        saveUserId = String(friends.id)
     }
     
-    func configureWithGroup(group: Group) {
-        if let image = group.groupImage {
-            mainImageView.image = image
-        }
-
-        nameLabel.text = group.name
+    func configureWithGroup(groups: GroupsRealm) {
+        guard let url = URL(string: groups.photo100) else { return }
+        let session = URLSession.shared
         
-        if let description = group.description {
-        descriptionLabel.text = String(description)
-        }
+        session.dataTask(with: url) { (data, response, error) in
+            if let data = data, let _ = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.mainImageView.setImage(at: url)
+//                    self.mainImageView.image = image
+                }
+            }
+        }.resume()
         
-        saveGroup = group
+        nameLabel.text = groups.name
+        descriptionLabel.text = "Адрес: " + groups.screenName
+        
+//        if let image = group.groupImage {
+//            mainImageView.image = image
+//        }
+//
+//        nameLabel.text = group.name
+//
+//        if let description = group.description {
+//        descriptionLabel.text = String(description)
+//        }
+//
+//        saveGroup = group
     }
     
 }
